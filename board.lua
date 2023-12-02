@@ -8,7 +8,7 @@ function TicTacBoard:new()
     self.current_player = 1
     self.bTurnOver = false
     
-    local cellX = 10
+    local cellX = 190
     local cellY = 10
 
     -- Init the board
@@ -20,12 +20,12 @@ function TicTacBoard:new()
             EM:add_entity(self.grid[i][j])
 
             -- Increment the position for the next cell
-            cellX = cellX + 50
+            cellX = cellX + self.grid[i][j].width
         end
 
         -- Set position values for next iteration
-        cellX = 10
-        cellY = cellY + 50
+        cellX = 190
+        cellY = cellY + self.grid[i][1].height
     end
 
     cellY = cellY + 20
@@ -50,7 +50,7 @@ function TicTacBoard:new()
     EM:add_entity(clear)
 
     -- Alert Players to where they can draw their UI elements
-    cellX = 10
+    cellX = 190
     cellY = cellY + 20 + convert.height
     P1:set_interface_pos(cellX, cellY)
 
@@ -191,9 +191,9 @@ function TicTacBoard:draw()
             p = "O"
         end
         local msg = string.format("%s - your turn!", p)
-        love.graphics.print(msg, 10, 500)
+        love.graphics.print(msg, 190, 550)
     end
     if GameOver then
-        love.graphics.print(Message, 10, 500)
+        love.graphics.print(Message, 190, 550)
     end
 end

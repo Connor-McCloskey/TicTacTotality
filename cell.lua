@@ -2,8 +2,8 @@ Cell = Entity:extend()
 
 function Cell:new(x, y, c, r)
     self.mark = " "
-    self.width = 50
-    self.height = 50
+    self.width = 70
+    self.height = 70
     self.x = x
     self.y = y
     self.mark_x = self.x + 20

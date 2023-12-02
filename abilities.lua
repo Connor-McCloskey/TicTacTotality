@@ -153,7 +153,7 @@ function Clear:use(cell, mark)
     local c = cell.column
 
     -- Go through all iterations of the surrounding 4x4 area
-    Board.grid[r][c]:set_mark(" ")
+    Board.grid[r][c]:clear_mark()
     CheckValid(r, c+1, "clear")
     CheckValid(r, c-1, "clear")
     CheckValid(r+1, c, "clear")
@@ -187,7 +187,7 @@ function CheckValid(r, c, mode)
         return
     end
     if mode == "clear" then
-        Board.grid[r][c]:set_mark(" ")
+        Board.grid[r][c]:clear_mark()
         return
     end
 end
