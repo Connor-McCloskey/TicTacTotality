@@ -55,7 +55,7 @@ function Convert:new(x, y)
     self.height = 25
     self.type = "convert"
     self.label = "Convert Square"
-    self.label_width = GetStringPrintLength(self.label)
+    self.label_width = GetStringPrintLength(self.label) + 5
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -75,7 +75,7 @@ function Column_Shift:new(x,y)
     self.height = 25
     self.type = "column"
     self.label = "Shift Column Down"
-    self.label_width = GetStringPrintLength(self.label)
+    self.label_width = GetStringPrintLength(self.label) + 5
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -99,7 +99,7 @@ function Row_Shift:new(x,y)
     self.height = 25
     self.type = "row"
     self.label = "Shift Row Right"
-    self.label_width = GetStringPrintLength(self.label)
+    self.label_width = GetStringPrintLength(self.label) + 5
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -124,7 +124,7 @@ function Random:new(x,y)
     self.height = 25
     self.type = "random"
     self.label = "Randomize 3x3 Grid"
-    self.label_width = GetStringPrintLength(self.label)
+    self.label_width = GetStringPrintLength(self.label) + 5
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -157,7 +157,7 @@ function Clear:new(x,y)
     self.height = 25
     self.type = "clear"
     self.label = "Clear 3x3 Grid"
-    self.label_width = GetStringPrintLength(self.label)
+    self.label_width = GetStringPrintLength(self.label) + 5
     self.x = x
     self.y = y
     self.label_x = x + 1

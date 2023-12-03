@@ -28,6 +28,7 @@ function TicTacBoard:new()
         cellY = cellY + self.grid[i][1].height
     end
 
+    cellX = 120
     cellY = cellY + 20
     -- Init abilities fields
     local convert = Convert(cellX, cellY)
@@ -50,8 +51,8 @@ function TicTacBoard:new()
     EM:add_entity(clear)
 
     -- Alert Players to where they can draw their UI elements
-    cellX = 190
-    cellY = cellY + 20 + convert.height
+    cellX = 270
+    cellY = cellY + 40 + convert.height
     P1:set_interface_pos(cellX, cellY)
 
     cellX = cellX + 150
@@ -183,6 +184,7 @@ function TicTacBoard:change_active_player()
 end
 
 function TicTacBoard:draw()
+    local font = love.graphics.newFont(20)
     if not GameOver then
         local p = nil
         if self.current_player == 1 then
@@ -191,9 +193,10 @@ function TicTacBoard:draw()
             p = "O"
         end
         local msg = string.format("%s - your turn!", p)
-        love.graphics.print(msg, 190, 550)
+        
+        love.graphics.print(msg, font, 320, 550)
     end
     if GameOver then
-        love.graphics.print(Message, 190, 550)
+        love.graphics.print(Message, font, 320, 550)
     end
 end

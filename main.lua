@@ -44,6 +44,7 @@ function love.draw()
     EM:draw()
 end
 
+-- Mouse input
 function love.mousepressed(x, y, button, isTouched)
     if button == 1 then
         ProcessMouseEvent = true
