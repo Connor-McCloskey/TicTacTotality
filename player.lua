@@ -48,15 +48,23 @@ function Player:update(dt)
 
         -- On ability? Then prime!
         if other:is(AbilityParent) then
-            if self.action_points - other.cost >= 0 then
-                type = other:on_clicked()
-                if self.bAbilityPrimed then
+            if self.bAbilityPrimed then
+                if self.PrimedAbility == other then
                     self.PrimedAbility:clear_status()
+                    self.PrimedAbility = nil
                     self.bAbilityPrimed = false
+                    return
+                else
+                    self.PrimedAbility:clear_status()
+                    self.PrimedAbility = other
+                    other:on_clicked()
+                    return
                 end
-                self.bAbilityPrimed = true
-                self.PrimedAbility = other
             end
+
+            self.bAbilityPrimed = true
+            self.PrimedAbility = other
+            other:on_clicked()
         end
 
         -- On cell?

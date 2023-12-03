@@ -16,21 +16,23 @@ function AbilityParent:update(dt)
 end
 
 function AbilityParent:draw()
-    if self.bIsPrimed then
-        local red = 255/255
-        local green = 0/255
-        local blue = 0/255
-        local alpha = 100/100
-        love.graphics.setColor(red, green, blue, alpha)
-    else
-        love.graphics.setColor(255,255,255,1)
+    love.graphics.setColor(1,1,1)
+    local red = 1
+    local blue = 1
+    local green = 1
+
+    if self.bIsPrimed == true then
+        blue = 0
+        green = 0
     end
 
+    love.graphics.setColor(red,blue,green)
     love.graphics.rectangle("line", self.x, self.y, self.label_width, self.height)
-    love.graphics.setColor(255,255,255,1)
-    love.graphics.print(self.label, self.label_x, self.label_y)
-    local costString = string.format("AP Cost: %d", self.cost)
 
+    love.graphics.setColor(1,1,1)
+    love.graphics.print(self.label, self.label_x, self.label_y)
+
+    local costString = string.format("AP Cost: %d", self.cost)
     local costX = self.x
     local costY = self.y + self.height
     love.graphics.print(costString, costX, costY)
@@ -44,16 +46,13 @@ function AbilityParent:clear_status()
 end
 
 function AbilityParent:on_clicked()
-    -- Prime for use
-    -- change image to "ready to deploy"
-    -- Or if primed, unprime
-    if self.bIsPrimed == false then
-        self.bIsPrimed = true
-        return self.type
-    else
+    if self.bIsPrimed then
         self.bIsPrimed = false
         return nil
     end
+
+    self.bIsPrimed = true
+    return self.type
 end
 
 function AbilityParent:get_cost()
@@ -71,6 +70,7 @@ function Convert:new(x, y)
     self.type = "convert"
     self.label = "Convert Square"
     self.label_width = GetStringPrintLength(self.label) + 5
+    self.width = self.label_width
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -78,6 +78,7 @@ function Convert:new(x, y)
 end
 
 function Convert:use(cell, mark)
+    self.bIsPrimed = false
     cell:set_mark(mark)
 end
 
@@ -91,6 +92,7 @@ function Column_Shift:new(x,y)
     self.type = "column"
     self.label = "Shift Column Down"
     self.label_width = GetStringPrintLength(self.label) + 5
+    self.width = self.label_width
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -98,6 +100,7 @@ function Column_Shift:new(x,y)
 end
 
 function Column_Shift:use(cell, mark)
+    self.bIsPrimed = false
     local temp = Board.grid[Board.row_count][cell.column].mark
     for i = Board.row_count, 2, -1 do
         Board.grid[i][cell.column]:set_mark(Board.grid[i-1][cell.column].mark)
@@ -115,6 +118,7 @@ function Row_Shift:new(x,y)
     self.type = "row"
     self.label = "Shift Row Right"
     self.label_width = GetStringPrintLength(self.label) + 5
+    self.width = self.label_width
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -122,6 +126,7 @@ function Row_Shift:new(x,y)
 end
 
 function Row_Shift:use(cell, mark)
+    self.bIsPrimed = false
     local temp = Board.grid[cell.row][Board.column_count].mark
     for i = Board.column_count, 2, -1 do
         Board.grid[cell.row][i]:set_mark(Board.grid[cell.row][i-1].mark)
@@ -140,6 +145,7 @@ function Random:new(x,y)
     self.type = "random"
     self.label = "Randomize 3x3 Grid"
     self.label_width = GetStringPrintLength(self.label) + 5
+    self.width = self.label_width
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -147,6 +153,7 @@ function Random:new(x,y)
 end
 
 function Random:use(cell, mark)
+    self.bIsPrimed = false
     -- Gather all surrounding valid cells
     local r = cell.row
     local c = cell.column
@@ -173,6 +180,7 @@ function Clear:new(x,y)
     self.type = "clear"
     self.label = "Clear 3x3 Grid"
     self.label_width = GetStringPrintLength(self.label) + 5
+    self.width = self.label_width
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -180,6 +188,7 @@ function Clear:new(x,y)
 end
 
 function Clear:use(cell, mark)
+    self.bIsPrimed = false
     -- Gather all surrounding valid cells
     local r = cell.row
     local c = cell.column

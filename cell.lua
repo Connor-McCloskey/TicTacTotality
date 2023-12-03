@@ -15,6 +15,11 @@ end
 
 function Cell:set_mark(player_mark)
     self.mark = player_mark
+    if player_mark == " " then
+        self.bIsClaimed = false
+        return
+    end
+    
     self.bIsClaimed = true
 end
 
