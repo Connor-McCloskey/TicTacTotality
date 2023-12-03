@@ -50,6 +50,10 @@ function Player:update(dt)
         if other:is(AbilityParent) then
             if self.action_points - other.cost >= 0 then
                 type = other:on_clicked()
+                if self.bAbilityPrimed then
+                    self.PrimedAbility:clear_status()
+                    self.bAbilityPrimed = false
+                end
                 self.bAbilityPrimed = true
                 self.PrimedAbility = other
             end

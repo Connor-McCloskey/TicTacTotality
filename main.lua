@@ -24,6 +24,14 @@ function love.load()
     EM:add_entity(P2)
     EM:add_entity(Board)
 
+    local red = 40/255
+    local green = 40/255
+    local blue = 255/255
+    local alpha = 80/100
+    love.graphics.setBackgroundColor(red, green, blue, alpha)
+
+    BackgroundColor = {red, green, blue, alpha}
+
     print("\n-- Loading complete --\n")
 end
 
@@ -36,11 +44,6 @@ end
 
 -- Engine render
 function love.draw()
-    local red = 40/255
-    local green = 40/255
-    local blue = 255/255
-    local alpha = 80/100
-    love.graphics.setBackgroundColor(red, green, blue, alpha)
     EM:draw()
 end
 

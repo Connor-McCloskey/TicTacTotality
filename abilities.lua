@@ -16,16 +16,31 @@ function AbilityParent:update(dt)
 end
 
 function AbilityParent:draw()
+    if self.bIsPrimed then
+        local red = 255/255
+        local green = 0/255
+        local blue = 0/255
+        local alpha = 100/100
+        love.graphics.setColor(red, green, blue, alpha)
+    else
+        love.graphics.setColor(255,255,255,1)
+    end
+
     love.graphics.rectangle("line", self.x, self.y, self.label_width, self.height)
+    love.graphics.setColor(255,255,255,1)
     love.graphics.print(self.label, self.label_x, self.label_y)
     local costString = string.format("AP Cost: %d", self.cost)
-    local costWidth = GetStringPrintLength(costString)
+
     local costX = self.x
     local costY = self.y + self.height
     love.graphics.print(costString, costX, costY)
 end
 
 function AbilityParent:use(cell, mark)
+end
+
+function AbilityParent:clear_status()
+    self.bIsPrimed = false
 end
 
 function AbilityParent:on_clicked()
