@@ -54,7 +54,7 @@ function Player:update(dt)
                     self.PrimedAbility = nil
                     self.bAbilityPrimed = false
                     return
-                else
+                elseif self.action_points - other:get_cost() >= 0 then
                     self.PrimedAbility:clear_status()
                     self.PrimedAbility = other
                     other:on_clicked()
@@ -62,9 +62,11 @@ function Player:update(dt)
                 end
             end
 
-            self.bAbilityPrimed = true
-            self.PrimedAbility = other
-            other:on_clicked()
+            if self.action_points - other:get_cost() >= 0 then
+                self.bAbilityPrimed = true
+                self.PrimedAbility = other
+                other:on_clicked()
+            end
         end
 
         -- On cell?
