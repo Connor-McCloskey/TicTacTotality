@@ -7,15 +7,22 @@ function AbilityParent:new()
     self.width = 0
     self.height = 0
     self.type = "base"
+    self.label = "base"
     self.bIsPrimed = false
+    self.label_width = 0
 end
 
 function AbilityParent:update(dt)
 end
 
 function AbilityParent:draw()
-    love.graphics.rectangle("line", self.x, self.y, self.width, self.height)
-    love.graphics.print(self.type, self.label_x, self.label_y)
+    love.graphics.rectangle("line", self.x, self.y, self.label_width, self.height)
+    love.graphics.print(self.label, self.label_x, self.label_y)
+    local costString = string.format("AP Cost: %d", self.cost)
+    local costWidth = GetStringPrintLength(costString)
+    local costX = self.x
+    local costY = self.y + self.height
+    love.graphics.print(costString, costX, costY)
 end
 
 function AbilityParent:use(cell, mark)
@@ -47,6 +54,8 @@ function Convert:new(x, y)
     self.width = 50
     self.height = 25
     self.type = "convert"
+    self.label = "Convert Square"
+    self.label_width = GetStringPrintLength(self.label)
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -65,6 +74,8 @@ function Column_Shift:new(x,y)
     self.width = 50
     self.height = 25
     self.type = "column"
+    self.label = "Shift Column Down"
+    self.label_width = GetStringPrintLength(self.label)
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -87,6 +98,8 @@ function Row_Shift:new(x,y)
     self.width = 50
     self.height = 25
     self.type = "row"
+    self.label = "Shift Row Right"
+    self.label_width = GetStringPrintLength(self.label)
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -106,10 +119,12 @@ end
 Random = AbilityParent:extend()
 
 function Random:new(x,y)
-    self.cost = 3
+    self.cost = 6
     self.width = 50
     self.height = 25
     self.type = "random"
+    self.label = "Randomize 3x3 Grid"
+    self.label_width = GetStringPrintLength(self.label)
     self.x = x
     self.y = y
     self.label_x = x + 1
@@ -141,6 +156,8 @@ function Clear:new(x,y)
     self.width = 50
     self.height = 25
     self.type = "clear"
+    self.label = "Clear 3x3 Grid"
+    self.label_width = GetStringPrintLength(self.label)
     self.x = x
     self.y = y
     self.label_x = x + 1

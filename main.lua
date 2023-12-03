@@ -36,6 +36,11 @@ end
 
 -- Engine render
 function love.draw()
+    local red = 40/255
+    local green = 40/255
+    local blue = 255/255
+    local alpha = 80/100
+    love.graphics.setBackgroundColor(red, green, blue, alpha)
     EM:draw()
 end
 
@@ -49,4 +54,10 @@ end
 
 function love.mousereleased(x, y, button)
     ProcessMouseEvent = false
+end
+
+-- Helper funcs
+function GetStringPrintLength(string)
+    local font = love.graphics.getFont()
+    return font:getWidth(string)
 end

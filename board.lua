@@ -33,19 +33,19 @@ function TicTacBoard:new()
     local convert = Convert(cellX, cellY)
     EM:add_entity(convert)
 
-    cellX = cellX + 10 + convert.width
+    cellX = cellX + 10 + convert.label_width
     local cShift = Column_Shift(cellX, cellY)
     EM:add_entity(cShift)
 
-    cellX = cellX + 10 + cShift.width
+    cellX = cellX + 10 + cShift.label_width
     local rShift = Row_Shift(cellX, cellY)
     EM:add_entity(rShift)
 
-    cellX = cellX + 10 + rShift.width
+    cellX = cellX + 10 + rShift.label_width
     local rando = Random(cellX, cellY)
     EM:add_entity(rando)
 
-    cellX = cellX + 10 + rando.width
+    cellX = cellX + 10 + rando.label_width
     local clear = Clear(cellX, cellY)
     EM:add_entity(clear)
 
