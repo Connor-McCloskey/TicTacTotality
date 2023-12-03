@@ -90,6 +90,7 @@ function Player:update(dt)
                 if self.PrimedAbility ~= nil then
                     self.PrimedAbility.bIsPrimed = false
                     self.PrimedAbility = nil
+                    self.PrimedAbility:clear_status()
                 end
                 return
             end
