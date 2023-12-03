@@ -30,8 +30,6 @@ function love.load()
     local alpha = 80/100
     love.graphics.setBackgroundColor(red, green, blue, alpha)
 
-    BackgroundColor = {red, green, blue, alpha}
-
     print("\n-- Loading complete --\n")
 end
 
